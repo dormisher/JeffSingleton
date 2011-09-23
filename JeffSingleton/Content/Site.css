@@ -9,3 +9,36 @@ ol, ul { list-style: none; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
+
+/* Styles */
+
+body { padding-top: 50px;font-family: Verdana; }
+
+div#content { width: 950px; margin: auto; }
+
+/* main */
+
+div#main { width: 720px; height: 900px;float: left; }
+
+/* right */
+
+div#right { width: 200px; height: 700px; float: right; }
+
+div#title { background-color: #161711; height: 200px;padding-top: 0;padding-left: 11px; }
+div#title #jeff { color: #fff; font-size: 44px;padding-top: 80px; }
+div#title #singleton { color: #5C5D59; font-size: 38px;margin-top: 10px; }
+
+ul#nav { text-align: center;padding: 10px 0;border-bottom: 1px solid #ddd;font-size: 11px;  }
+ul#nav li { display: inline;padding: 0 5px; }
+ul#nav a { text-decoration: none;color: #666; }
+ul#nav a:hover { color: #000; }
+
+div#footer { border-bottom: 1px solid #ddd; border-top: 1px solid #ddd; color: #666;font-size: 10px;
+    text-align: center;margin-top: 20px;padding: 5px 0;}
+div#footer p { margin: 5px 0; }
+
+/* classes */
+
+.inlineBlock { display:inline-block; zoom:1; *display:inline; }
+.left { float: left; }
+.right { float: right; }

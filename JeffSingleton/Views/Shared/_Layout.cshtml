@@ -10,15 +10,37 @@
 </head>
 
 <body>
-    
-    <div id="main">
-        @RenderSection("Main")
-    </div>
+    <div id="content">
 
-    <div id="right">
-        <div id="title">            
+        <div id="main">
+            @RenderSection("Main")
         </div>
-        @RenderSection("Right")
+
+        <div id="right">
+
+            <div id="title">
+                <p id="jeff">Jeff</p>
+                <p id="singleton">Singleton</p>
+            </div>
+
+            <ul id="nav">
+                <li>@Html.ActionLink("Home", "Index", new {controller = "Home"})</li>
+                <li>@Html.ActionLink("Gallery", "Index", new {controller = "Gallery"})</li>
+                <li>@Html.ActionLink("About", "Index", new {controller = "About"})</li>
+                @*<li>@Url.Action("Index", new {controller = "Contact"})</li>*@
+            </ul>
+
+            <div id="rightContent">
+                @RenderSection("Right")
+            </div>
+
+            <div id="footer">
+                <p>ALL WORK SUBJECT TO</p>
+                <p>&copy; COPYRIGHT</p>
+                <p>JEFF SINGLETON 2011</p>
+            </div>
+        </div>
+
     </div>
 </body>
 
