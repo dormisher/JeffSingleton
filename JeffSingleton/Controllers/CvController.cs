@@ -2,7 +2,7 @@
 
 namespace JeffSingleton.Controllers
 {
-    public class AboutController : Controller
+    public class CvController : Controller
     {
         //
         // GET: /About/
