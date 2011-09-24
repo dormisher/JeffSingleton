@@ -3,6 +3,8 @@
 <head>
     <title>Jeff Singleton</title>
 
+    <link href="@Url.Content("~/Content/Reset.css")" rel="stylesheet" type="text/css" />
+
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     
     @RenderSection("Styles", false)
@@ -25,13 +27,13 @@
 
             <ul id="nav">
                 <li>@Html.ActionLink("Home", "Index", new {controller = "Home"})</li>
-                <li>@Html.ActionLink("Gallery", "Index", new {controller = "Gallery"})</li>
+                <li>@Html.ActionLink("Gallery", "Index", new {controller = "Gallery", section = 0})</li>
                 <li>@Html.ActionLink("CV", "Index", new {controller = "Cv"})</li>
                 @*<li>@Url.Action("Index", new {controller = "Contact"})</li>*@
             </ul>
 
             <div id="rightContent">
-                @RenderSection("Right")
+                @RenderSection("Right", false)
             </div>
 
             <div id="footer">

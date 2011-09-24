@@ -20,10 +20,11 @@ namespace JeffSingleton.Controllers
             if (FormsAuthentication.Authenticate(username, password))
             {
                 FormsAuthentication.SetAuthCookie(username, true);
+                return RedirectToAction("Index", new { Controller = "Admin" });
             }
             
             ModelState.AddModelError("", "");
-            return RedirectToAction("Index", new {Controller = "Admin"});
+            return View();
         }
     }
 }

@@ -1,32 +1,18 @@
 ﻿using System.Web.Mvc;
+using System.Drawing;
+using JeffSingleton.Database;
+using System.Linq;
+using System;
 
 namespace JeffSingleton.Controllers
 {
     public class GalleryController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        JsDatabase _db = new JsDatabase();
 
-        public ActionResult Paintings()
+        public ActionResult Index(int section)
         {
             return View();
-        }
-
-        public ActionResult Photography()
-        {
-            return View();
-        }
-
-        public ActionResult Installations()
-        {
-            return View();
-        }
-
-        public ActionResult Sculpture()
-        {
-            return View();
-        }
+        }        
     }
 }

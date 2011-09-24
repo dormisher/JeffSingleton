@@ -1,22 +1,28 @@
-﻿@{
-    Layout = "";
+﻿@model JeffSingleton.Models.ViewModels.LoginModel
+
+@section Styles
+{
+    <style>
+        form { margin:50px 0; }
+    </style>
 }
 
-<h2>Login</h2>
+@section Main
+{
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Incorrect")
 
-@Html.ValidationSummary("Incorrect")
-
-<ul>
-    <li>
-        <label>Username</label>
-        <input type="text" name="username"/>
-    </li>
-    <li>
-        <label>Username</label>
-        <input type="password" name="password"/>
-    </li>
-    <li>
-        <label></label>
-        <input type="submit" value="Login"/>
-    </li>
-</ul>
+        <ul>
+            <li>
+                <label>Username</label>
+                @Html.TextBoxFor(m => m.Username)
+            </li>
+            <li>
+                <label>Password</label>
+                @Html.PasswordFor(m => m.Password)
+                <input type="submit" value="Login"/>
+            </li>
+        </ul>
+    }
+}

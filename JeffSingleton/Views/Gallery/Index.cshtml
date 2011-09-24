@@ -15,7 +15,12 @@
 
 @section Right
 {
-    @Html.Partial("GallerySections")
+    <ul id="gallerySections">
+        <li style="border-top:1px dotted #ccc;">@Html.ActionLink("Paintings", "Index", new { section = 0 })</li>
+        <li>@Html.ActionLink("Photography", "Index", new { section = 1 })</li>
+        <li>@Html.ActionLink("Installations", "Index", new { section = 2 })</li>
+        <li>@Html.ActionLink("Sculpture", "Index", new { section = 3 })</li>
+    </ul>
 }
 
 @section Scripts

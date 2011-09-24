@@ -1,0 +1,83 @@
+﻿@model JeffSingleton.Models.ViewModels.AdminViewModel
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeff Singleton, Admin</title>
+
+    <link href="@Url.Content("~/Content/Reset.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <style>
+        div#admin { width:800px; margin:auto; margin-bottom:100px; }
+        h1 { font-size:24px; padding-bottom:20px; border-bottom:1px solid #ccc; margin-bottom:20px; }
+        #lblSection { margin-bottom:20px; }
+        #addImageList { margin:20px 0; }
+        #addImageList label { display:inline-block; zoom:1; *display:inline; width:100px; vertical-align:top; }
+        textarea { font-family:Verdana; width:600px; height:100px; }
+        .validation-summary-errors { color:Red; border:1px solid Red; padding:10px; }
+        
+        ul#images img { width:200px; }
+        ul#images h2 { border-bottom:1px solid #ccc; padding-bottom:10px; margin:10px 0; font-size:14px; }
+        ul#images span { font-size:12px; line-height:1.5; vertical-align:top; }
+    </style>
+    
+</head>
+
+<body>
+    <div id="admin">       
+
+        <form action="Images" method="post" enctype="multipart/form-data">
+        
+            @Html.ActionLink("main site", "Index", new { controller = "Home" }, new { @class = "right" })
+
+            <h1>Admin</h1>
+            
+            @Html.ValidationSummary(false)
+
+            <label id="lblSection">Gallery Section:</label>
+            @Html.DropDownListFor(m => m.GallerySection, Model.GetSelectList(), new { id = "ddlSection" })
+           
+            <ul id="addImageList">
+                <li>
+                    <label>File:</label>
+                    <input type="file" name="Image" />     
+                </li>
+                <li>
+                    <label>Title:</label>
+                    @Html.TextBoxFor(m => m.Title)     
+                </li>
+                <li>
+                    <label>Info:</label>
+                    @Html.TextAreaFor(m => m.Info)        
+                </li>
+                <li>
+                    <label></label>
+                    <input style="font-size:18px;" type="submit" value="Add" />
+                </li>
+            </ul>
+            
+            @Html.Action("GetImageList", new { section = Model.GallerySection })
+
+            @Html.HiddenFor(m => m.GallerySection)
+
+        </form>
+    </div>
+</body>
+
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.js")" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ddlSection').change(function () {
+                var tmp = $(this).val();
+                window.location = '@Url.RouteUrl(new {controller = "Admin", action = "Images"})?section=' + $(this).val();
+            });
+        });
+    </script>
+            
+</html>
