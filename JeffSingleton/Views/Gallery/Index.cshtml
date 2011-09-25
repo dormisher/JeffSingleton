@@ -1,25 +1,83 @@
-﻿
+﻿@model JeffSingleton.Models.ViewModels.GalleryViewModel
+
 <h2>Index</h2>
 
 @section Styles
 {
     <style>
-    
+        div#imgContainer { text-align:center; }
+        img#mainImage { margin:auto; }
+        img#mainImage.limitHeight { height:500px; }
+        
+        div#controls { border-bottom:1px solid #ccc; padding:10px; text-align:center; margin-bottom:10px; }
+        div#controls #title { font-weight:bold; margin:0 50px; }
+        div#controls p { margin-top:5px; }
+        div#controls a { text-decoration:none; color:#bbb; font-size:10px; }
+        div#controls a:hover { color:#000; }
+        div#controls .disabledLink { color:#bbb; font-size:10px; }
+        
+        div#thumbs { text-align:center; }
+        div#thumbs ul li { border:1px solid #ccc; padding:3px; cursor:pointer; }        
+        div#thumbs ul li:hover { border-color:#444; }
+        div#thumbs ul li.selected { border:2px solid #444; }
     </style>
 }
 
 @section Main
 {
-    
+    @if (Model.Images.Count > 0)
+    {
+        <div id="imgContainer">
+            <img id="mainImage" class="@(Model.Main.Height > 400 ? "limitHeight" : "")" src="@Url.Content(Model.Main.Filename)" />
+        </div>
+
+        <div id="controls">
+            @if (Model.CurrentOrder <= 1)
+            {
+                <span class="disabledLink">Previous</span>
+            }
+            else
+            {
+                @Html.ActionLink("Previous", "Index", new { section = Model.GallerySection, order = Model.CurrentOrder - 1 })
+            }
+
+            <span id="title">@Model.Main.Title</span>
+
+            @if (Model.Images.Count == Model.CurrentOrder)
+            {
+                <span class="disabledLink">Next</span>
+            }
+            else
+            {
+                @Html.ActionLink("Next", "Index", new { section = Model.GallerySection, order = Model.CurrentOrder + 1 })
+            }
+            <p>
+                @Model.Main.Info
+            </p>
+        </div>
+
+        <div id="thumbs">
+            <ul>
+                @foreach (var i in Model.Images)
+                {
+                    <li class="inlineBlock @(i.Order == Model.CurrentOrder ? "selected" : "")">
+                        <a href="@Url.RouteUrl(new { controller = "Gallery", action = "Index", section = i.GallerySection, order = i.Order })">
+                            <img src="@Url.Content(i.Thumbnail)" />            
+                        </a>
+                    </li>            
+                }
+            </ul>
+        </div>
+    }
 }
 
 @section Right
 {
     <ul id="gallerySections">
-        <li style="border-top:1px dotted #ccc;">@Html.ActionLink("Paintings", "Index", new { section = 0 })</li>
-        <li>@Html.ActionLink("Photography", "Index", new { section = 1 })</li>
-        <li>@Html.ActionLink("Installations", "Index", new { section = 2 })</li>
-        <li>@Html.ActionLink("Sculpture", "Index", new { section = 3 })</li>
+        <li style="border-top:1px dotted #ccc;">@Html.ActionLink("Paintings", "Index", new { section = 0, order = 1 })</li>
+        <li>@Html.ActionLink("Photography", "Index", new { section = 1, order = 1 })</li>
+        <li>@Html.ActionLink("Installations", "Index", new { section = 2, order = 1 })</li>
+        <li>@Html.ActionLink("Sculpture", "Index", new { section = 3, order = 1 })</li>
     </ul>
 }
 

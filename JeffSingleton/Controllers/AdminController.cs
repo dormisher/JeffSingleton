@@ -92,6 +92,7 @@ namespace JeffSingleton.Controllers
 
         private void SaveImage(AdminViewModel model)
         {
+            string fileName = Request.Files[0].FileName;
             var type = (GallerySectionsType)model.GallerySection;
 
             string path = "";
@@ -112,33 +113,33 @@ namespace JeffSingleton.Controllers
                 path = "~/Content/GalleryImages/Installations/";
             }
 
-            _db.GalleryImages.Add(new GalleryImage
-                                        {
-                                            Filename = path + Request.Files[0].FileName,
-                                            Thumbnail = path + "/Thumbs/" + Request.Files[0].FileName,
-                                            GallerySection = (int)model.GallerySection,
-                                            Info = model.Info,
-                                            Title = model.Title,
-                                            Order = _db.GalleryImages.Where(i => i.GallerySection == model.GallerySection).Count() + 1
-                                        });
-            _db.SaveChanges();
+            // save main file
+            Request.Files[0].SaveAs(HttpContext.Server.MapPath(path) + fileName);
 
-            Request.Files[0].SaveAs(HttpContext.Server.MapPath(path) + Request.Files[0].FileName);
+            // save thumnail
+            var mainImage = Image.FromFile(Server.MapPath(path + fileName));
 
-            SaveThumbnailImage(path, Request.Files[0].FileName);
-        }
+            double fraction = 50.0 / (double)mainImage.Width;
+            int height = (int)(mainImage.Height * fraction);
 
-        private void SaveThumbnailImage(string path, string name)
-        {
-            var image = Image.FromFile(Server.MapPath(path + name));
+            Image thumb = mainImage.GetThumbnailImage(50, height, new Image.GetThumbnailImageAbort(() => true), IntPtr.Zero);
 
-            double fraction = 50.0 / (double)image.Width;
-            int height = (int)(image.Height * fraction);
-
-            Image thumb = image.GetThumbnailImage(50, height, new Image.GetThumbnailImageAbort(() => true), IntPtr.Zero);
-
-            string thumbPath = path + "/Thumbs/" + name;
+            string thumbPath = path + "/Thumbs/" + fileName;
             thumb.Save(Server.MapPath(thumbPath));
+
+            // add to db
+            _db.GalleryImages.Add(new GalleryImage
+            {
+                Filename = path + fileName,
+                Thumbnail = path + "/Thumbs/" + fileName,
+                GallerySection = (int)model.GallerySection,
+                Width = mainImage.Width,
+                Height = mainImage.Height,
+                Info = model.Info,
+                Title = model.Title,
+                Order = _db.GalleryImages.Where(i => i.GallerySection == model.GallerySection).Count() + 1
+            });
+            _db.SaveChanges();
         }
 
         private bool ValidateNewImage(AdminViewModel model)

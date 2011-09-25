@@ -9,7 +9,7 @@ namespace JeffSingleton.Database
 
         public JsDatabase()
         {
-            //System.Data.Entity.Database.SetInitializer<EkmDomainsDbContext>(null);
+            System.Data.Entity.Database.SetInitializer<JsDatabase>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
