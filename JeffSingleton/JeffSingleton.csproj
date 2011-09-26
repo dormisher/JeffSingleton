@@ -85,6 +85,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CvController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
@@ -147,7 +148,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Contact\Index.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Images.cshtml" />
   </ItemGroup>
