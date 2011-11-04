@@ -106,7 +106,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\web_browsers_patch.xml" />
     <Content Include="Content\GalleryImages\Installations\Thumbs\1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -160,10 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\ImageList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\51Degrees.mobi.config" />
-    <None Include="App_Data\wurfl.xml.gz" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

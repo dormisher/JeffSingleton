@@ -1,8 +1,6 @@
 ﻿using System.Web.Mvc;
-using System.Drawing;
 using JeffSingleton.Database;
 using System.Linq;
-using System;
 using JeffSingleton.Models.ViewModels;
 
 namespace JeffSingleton.Controllers
@@ -21,6 +19,6 @@ namespace JeffSingleton.Controllers
             model.Images = _db.GalleryImages.Where(i => i.GallerySection == section).OrderBy(i => i.Order).ToList();
 
             return View(model);
-        }        
+        }
     }
 }

@@ -2,9 +2,7 @@
 using JeffSingleton.Models.ViewModels;
 using JeffSingleton.Database;
 using System.Linq;
-using System.Web;
 using JeffSingleton.Models;
-using System.IO;
 using System.Drawing;
 using System;
 
@@ -78,12 +76,19 @@ namespace JeffSingleton.Controllers
 
         public ActionResult DeleteImage(int id)
         {
-            var image = _db.GalleryImages.Single(i => i.Id == id);
+            GalleryImage image = _db.GalleryImages.Single(i => i.Id == id);
 
+            int order = image.Order;
+
+            _db.GalleryImages.Where(g => g.Order > order).ToList().ForEach(g => g.Order--);
             _db.GalleryImages.Remove(image);
             _db.SaveChanges();
 
-            System.IO.File.Delete(HttpContext.Server.MapPath(image.Filename));
+            try
+            {
+                System.IO.File.Delete(HttpContext.Server.MapPath(image.Filename));
+            }
+            catch { }
 
             return RedirectToAction("Images", new { section = image.GallerySection });
         }
