@@ -1,0 +1,2 @@
+migrate.exe --connection "Data Source=tcp:s03.winhost.com;Initial Catalog=DB_14030_dandev;User ID=DB_14030_dandev_user;Password=singleton;Integrated Security=False;" --db SqlServer2008 --target "..\..\bin\JeffSingleton.dll"
+pause
