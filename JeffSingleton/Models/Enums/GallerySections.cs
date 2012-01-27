@@ -1,8 +1,11 @@
 ﻿
-public enum GallerySectionsType
+namespace JeffSingleton.Models.Enums
 {
-    Paintings,
-    Photography,
-    Sculptures,
-    Installations
+	public enum GallerySectionsType
+	{
+		Paintings,
+		Photography,
+		Printmaking,
+		Installations
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using JeffSingleton.Models.Enums;
 using JeffSingleton.Models.ViewModels;
 using JeffSingleton.Database;
 using System.Linq;
@@ -58,18 +59,18 @@ namespace JeffSingleton.Controllers
             int oldOrder = image.Order;
             int newOrder = up ? image.Order - 1 : image.Order + 1;
 
-            if (newOrder != 0 && newOrder <= _db.GalleryImages.Count())
+			if (newOrder != 0 && newOrder <= _db.GalleryImages.Where(i => i.GallerySection == image.GallerySection).Count())
             {
                 image.Order = newOrder;
-            }
 
-            var sibling = images.SingleOrDefault(i => i.GallerySection == image.GallerySection && i.Order == newOrder);
-            if (sibling != null)
-            {
-                sibling.Order = oldOrder;
-            }
+				var sibling = images.SingleOrDefault(i => i.GallerySection == image.GallerySection && i.Order == newOrder);
+				if (sibling != null)
+				{
+					sibling.Order = oldOrder;
+				}
 
-            _db.SaveChanges();
+				_db.SaveChanges();
+            }
 
             return RedirectToAction("Images", new { section = image.GallerySection });
         }
@@ -80,8 +81,11 @@ namespace JeffSingleton.Controllers
 
             int order = image.Order;
 
-            _db.GalleryImages.Where(g => g.Order > order).ToList().ForEach(g => g.Order--);
+        	var siblings = _db.GalleryImages.Where(i => i.GallerySection == image.GallerySection && i.Order > image.Order);
+			siblings.ToList().ForEach(i => i.Order--);
+
             _db.GalleryImages.Remove(image);
+
             _db.SaveChanges();
 
             try
@@ -109,9 +113,9 @@ namespace JeffSingleton.Controllers
             {
                 path = "~/Content/GalleryImages/Photography/";
             }
-            else if (type == GallerySectionsType.Sculptures)
+            else if (type == GallerySectionsType.Printmaking)
             {
-                path = "~/Content/GalleryImages/Sculptures/";
+                path = "~/Content/GalleryImages/Printmaking/";
             }
             else if (type == GallerySectionsType.Installations)
             {

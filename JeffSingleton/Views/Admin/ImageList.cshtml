@@ -10,7 +10,9 @@
         <p>
             @Html.ActionLink("Up", "UpdateOrder", new {id = i.Id, up = true})
             @Html.ActionLink("Down", "UpdateOrder", new {id = i.Id, up = false})
-        </p>
+			
+			(@i.Order)
+		</p>
         <p style="text-align:right;">
             @Html.ActionLink("Delete", "DeleteImage", new {id = i.Id})
         </p>

@@ -17,7 +17,7 @@
         div#controls .disabledLink { color:#bbb; font-size:10px; }
         
         div#thumbs { text-align:center; }
-        div#thumbs ul li { border:1px solid #ccc; padding:3px; cursor:pointer; }        
+        div#thumbs ul li { border:1px solid #ccc; padding:3px; cursor:pointer; vertical-align:middle; }        
         div#thumbs ul li:hover { border-color:#444; }
         div#thumbs ul li.selected { border:2px solid #444; }
     </style>
@@ -76,7 +76,7 @@
     <ul id="gallerySections">
         <li style="border-top:1px dotted #ccc;">@Html.ActionLink("Paintings", "Index", new { section = 0, order = 1 })</li>
         <li>@Html.ActionLink("Photography", "Index", new { section = 1, order = 1 })</li>
-        <li>@Html.ActionLink("Sculpture", "Index", new { section = 2, order = 1 })</li>
+        <li>@Html.ActionLink("Printmaking", "Index", new { section = 2, order = 1 })</li>
         <li>@Html.ActionLink("Installations", "Index", new { section = 3, order = 1 })</li>
     </ul>
 }
