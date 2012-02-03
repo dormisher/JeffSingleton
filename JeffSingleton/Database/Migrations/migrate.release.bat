@@ -1,2 +1,2 @@
-migrate.exe --connection "Data Source=tcp:s03.winhost.com;Initial Catalog=DB_14030_dandev;User ID=DB_14030_dandev_user;Password=singleton;Integrated Security=False;" --db SqlServer2008 --target "..\..\bin\JeffSingleton.dll"
+migrate.exe --connection "Server=77b730c2-d86e-4f0d-95a9-9fec010e0fd2.sqlserver.sequelizer.com;Database=db77b730c2d86e4f0d95a99fec010e0fd2;User ID=esgmkduheqicpygm;Password=QAgiRktWULCtTRHtq8QwXofh8r5THByPJSt2MET7xzRUNCGBf8WMpZNBv8jzpHos;" --db SqlServer2008 --target "..\..\bin\JeffSingleton.dll"
 pause
