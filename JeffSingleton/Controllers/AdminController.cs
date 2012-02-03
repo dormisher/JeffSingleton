@@ -10,7 +10,6 @@ using System;
 
 namespace JeffSingleton.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
         JsDatabase _db = new JsDatabase();
