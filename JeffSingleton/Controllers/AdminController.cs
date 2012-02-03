@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 using JeffSingleton.Models.Enums;
 using JeffSingleton.Models.ViewModels;
 using JeffSingleton.Database;
@@ -121,6 +122,8 @@ namespace JeffSingleton.Controllers
             {
                 path = "~/Content/GalleryImages/Installations/";
             }
+
+			Directory.CreateDirectory(HttpContext.Server.MapPath("~/Content/GalleryImages"));
 
             // save main file
             Request.Files[0].SaveAs(HttpContext.Server.MapPath(path) + fileName);
